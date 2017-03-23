@@ -2,10 +2,19 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import VueHighlightJS from 'vue-highlightjs'
+import WebFont from 'webfontloader'
 
-Vue.use(VueHighlightJS)
 Vue.config.productionTip = false
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+}
+
+WebFont.load({
+  google: {
+    families: ['Open+Sans:400,500,700']
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({

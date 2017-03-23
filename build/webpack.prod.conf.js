@@ -8,6 +8,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 var env = config.build.env
 
@@ -86,7 +87,25 @@ var webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new SWPrecacheWebpackPlugin(
+      {
+        cacheId: 'meta-hero',
+        filename: 'service-worker.js',
+        maximumFileSizeToCacheInBytes: 4194304,
+        minify: true,
+        runtimeCaching: [{
+          handler: 'networkFirst',
+          urlPattern: /\/api\//,
+        },{
+          handler: 'cacheFirst',
+          urlPattern: /[.](ttf)|(woff)$/,
+        },{
+          handler: 'cacheFirst',
+          urlPattern: /fonts\.googleapis\.com/,
+        }],
+      }
+    )
   ]
 })
 

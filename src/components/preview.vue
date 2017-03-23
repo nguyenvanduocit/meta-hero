@@ -3,7 +3,7 @@
     <div class="card__title">
       <h1>Your source code</h1>
     </div>
-    <pre v-highlightjs="code"><code class="HTML"></code></pre>
+    <pre><code class="HTML" v-text="code"></code></pre>
   </div>
 </template>
 <script>
@@ -20,9 +20,11 @@
     }
     pre{
       margin: 0;
-      .hljs{
+      padding: 30px;
+      background: #4B4F56;
+      color: #ffffff;
+      .HTML{
         min-height: 500px;
-        padding: 30px;
       }
     }
   }

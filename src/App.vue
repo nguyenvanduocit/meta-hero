@@ -129,7 +129,7 @@ export default {
               code: '<meta property="og:image" content="{{VALUE}}">'
             },
             description: {
-              label: 'Image URL',
+              label: 'Description',
               type: 'text',
               line: 3,
               value: '',
@@ -161,33 +161,24 @@ export default {
           fields: {
             type: {
               label: 'Card type',
-              type: 'radio',
-              value: 'summary',
+              type: 'hidden',
               code: '<meta name="twitter:site" content="{{VALUE}}">',
-              options: [
-                {
-                  label: 'Summary Card',
-                  value: 'summary'
-                },
-                {
-                  label: 'Summary Card with Large Image',
-                  value: 'summary_large_image'
-                },
-                {
-                  label: 'App Card',
-                  value: 'app'
-                },
-                {
-                  label: 'Player Card',
-                  value: 'player'
+              value: () => {
+                switch (this.groups.type.fields.type.value) {
+                  case 'app':
+                    return 'app'
+                  case 'video':
+                    return 'player'
+                  default:
+                    return 'summary_large_image'
                 }
-              ]
+              }
             },
             site: {
               label: 'Site',
               type: 'text',
               value: '',
-              code: '<meta name="twitter:site" content="{{VALUE}}">'
+              code: '<meta name="twitter:site" content="@{{VALUE}}">'
             },
             title: {
               label: 'Title',
@@ -206,63 +197,63 @@ export default {
               label: 'creator',
               type: 'text',
               value: '',
-              code: '<meta name="twitter:creator" content="{{VALUE}}">'
+              code: '<meta name="twitter:creator" content="@{{VALUE}}">'
             },
             image: {
               label: 'Image',
               type: 'text',
               value: '',
               code: '<meta name="twitter:image" content="{{VALUE}}">',
-              condition: () => this.groups.twitter.fields.type.value !== 'summary'
+              condition: () => this.groups.twitter.fields.type.value() !== 'summary'
             },
             playerUrl: {
               label: 'Player URL',
               type: 'text',
               value: '',
               code: '<meta name="twitter:image" content="{{VALUE}}">',
-              condition: () => this.groups.twitter.fields.type.value === 'player'
+              condition: () => this.groups.twitter.fields.type.value() === 'player'
             },
             appCountry: {
               label: 'App country',
               type: 'text',
               value: '',
               code: '<meta name="twitter:app:country" content="{{VALUE}}">',
-              condition: () => this.groups.twitter.fields.type.value === 'app'
+              condition: () => this.groups.twitter.fields.type.value() === 'app'
             },
             appNameAppStore: {
               label: 'App name',
               type: 'text',
               value: '',
               code: '<meta name="twitter:app:name:iphone" content="{{VALUE}}">\n<meta name="twitter:app:name:ipad" content="{{VALUE}}">\n<meta name="twitter:app:name:googleplay" content="{{VALUE}}">',
-              condition: () => this.groups.twitter.fields.type.value === 'app'
+              condition: () => this.groups.twitter.fields.type.value() === 'app'
             },
             appIdAppStore: {
               label: 'App ID (App Store)',
               type: 'text',
               value: '',
               code: '<meta name="twitter:app:id:iphone" content="{{VALUE}}">\n<meta name="twitter:app:id:ipad" content="{{VALUE}}">',
-              condition: () => this.groups.twitter.fields.type.value === 'app'
+              condition: () => this.groups.twitter.fields.type.value() === 'app'
             },
             appUrlAppStore: {
               label: 'App URL(App Store)',
               type: 'text',
               value: '',
               code: '<meta name="twitter:app:url:iphone" content="{{VALUE}}">\n<meta name="twitter:app:url:ipad" content="{{VALUE}}">',
-              condition: () => this.groups.twitter.fields.type.value === 'app'
+              condition: () => this.groups.twitter.fields.type.value() === 'app'
             },
             appIdPlayStore: {
               label: 'App ID (Play Store)',
               type: 'text',
               value: '',
               code: '<meta name="twitter:app:id:googleplay" content="{{VALUE}}">',
-              condition: () => this.groups.twitter.fields.type.value === 'app'
+              condition: () => this.groups.twitter.fields.type.value() === 'app'
             },
             appUrlPlayStore: {
               label: 'App URL(Play Store)',
               type: 'text',
               value: '',
               code: '<meta name="twitter:app:url:googleplay" content="{{VALUE}}">',
-              condition: () => this.groups.twitter.fields.type.value === 'app'
+              condition: () => this.groups.twitter.fields.type.value() === 'app'
             }
           }
         }

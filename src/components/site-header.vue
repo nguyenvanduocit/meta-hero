@@ -16,9 +16,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  @import "../styles/shared";
   .site-header{
     border-bottom: 1px solid rgba(74, 82, 95, 0.1);
-    margin-bottom: 80px;
+    margin-bottom: 40px;
+    @include media-breakpoint-up('md') {
+      margin-top: 80px;
+    }
     .inner{
       display: flex;
       align-items: center;

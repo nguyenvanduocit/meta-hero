@@ -12,7 +12,12 @@
   }
 </script>
 <style lang="scss" scoped>
+  @import "../styles/shared";
   .preview{
+    margin-top: 50px;
+    @include media-breakpoint-up('md') {
+      margin-top: 0;
+    }
     .card__title{
       background-image: linear-gradient(-225deg, #FEC180 0%, #FF8993 100%);
     }

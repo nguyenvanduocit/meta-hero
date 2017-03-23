@@ -8,8 +8,8 @@
             <editor :groups="groups"></editor>
           </div>
           <div class="gr-12 gr-8@lg gr-8@xl">
-            <div class="preview-pin"></div>
-            <preview :code="code"></preview>
+            <div class="preview-pin" ref='preview_pin'></div>
+            <preview :code="code" ref='code'></preview>
           </div>
         </div>
       </main>
@@ -35,19 +35,22 @@ export default {
     siteFooter
   },
   mounted () {
-    /* eslint-disable no-new */
-    new Tether({
-      element: this.$el,
-      target: '.preview-pin',
-      attachment: 'top left',
-      targetAttachment: 'top left',
-      constraints: [
-        {
-          to: 'window',
-          pin: true
-        }
-      ]
-    })
+    if (window.innerWidth > 991) {
+      /* eslint-disable no-new */
+      new Tether({
+        element: '.preview',
+        target: '.preview-pin',
+        attachment: 'top left',
+        targetAttachment: 'top left',
+        constraints: [
+          {
+            to: 'window',
+            pin: true
+          }
+        ]
+      })
+      this.$refs.code.$el.style.width = this.$refs.preview_pin.offsetWidth + 'px'
+    }
   },
   data () {
     return {

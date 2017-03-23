@@ -1,5 +1,5 @@
 {
-  "name": "meta-generator",
+  "name": "meta-hero",
   "version": "1.0.0",
   "description": "Meta tag generator",
   "author": "nguyenvanduocit <nguyenvanduocit@gmail.com>",
@@ -10,10 +10,12 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "gridle": "^2.0.48",
     "node-sass": "^4.5.0",
     "sass-loader": "^6.0.3",
     "vue": "^2.2.2",
-    "vue-highlightjs": "^1.2.0"
+    "vue-highlightjs": "^1.2.0",
+    "vuex": "^2.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

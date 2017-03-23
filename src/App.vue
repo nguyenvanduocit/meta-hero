@@ -1,62 +1,295 @@
 <template>
   <div id="app">
     <site-header></site-header>
-    <main>
-      <preview></preview>
-      <editor></editor>
-    </main>
+    <div class="container">
+      <main>
+        <div class="row">
+          <div class="gr-8">
+            <preview :code="code"></preview>
+          </div>
+          <div class="gr-4">
+            <editor :groups="groups"></editor>
+          </div>
+        </div>
+      </main>
+    </div>
+    <site-footer></site-footer>
   </div>
 </template>
 
 <script>
-import editor from './components/editor'
+import editor from '@/components/editor'
 import preview from './components/preview'
 import siteHeader from './components/site-header'
-import './scss/app.scss'
+import siteFooter from './components/site-footer'
+import './styles/app.scss'
+
 export default {
   name: 'app',
   components: {
     editor,
     preview,
-    siteHeader
+    siteHeader,
+    siteFooter
   },
   data () {
     return {
-      metaTags: [
-        {
-          code: '<meta charset="value">',
-          type: 'text'
+      groups: {
+        type: {
+          title: 'Type',
+          fields: {
+            type: {
+              label: 'What kind of your website?',
+              type: 'radio',
+              value: 'website',
+              options: [
+                {
+                  label: 'General Website',
+                  value: 'website'
+                },
+                {
+                  label: 'Mobile App (iOS & Android)',
+                  value: 'app'
+                },
+                {
+                  label: 'Article',
+                  value: 'article'
+                },
+                {
+                  label: 'Video',
+                  value: 'video'
+                },
+                {
+                  label: 'Product (e-commerce)',
+                  value: 'product'
+                }
+              ]
+            }
+          }
+        },
+        general: {
+          title: 'General',
+          fields: {
+            title: {
+              label: 'Page title',
+              type: 'text',
+              description: 'The SEO title of your website.',
+              value: '',
+              code: '<title>{{VALUE}}</title>'
+            },
+            description: {
+              label: 'Page description',
+              type: 'text',
+              line: 3,
+              description: 'The SEO title of your website.',
+              value: '',
+              code: '<meta name="description" content="{{VALUE}}">'
+            },
+            author: {
+              label: 'Author',
+              type: 'text',
+              description: 'The author of website',
+              value: '',
+              code: '<meta name="author" content="{{VALUE}}">'
+            },
+            language: {
+              label: 'Language',
+              type: 'text',
+              description: 'The author of website',
+              value: '',
+              code: '<meta name="language" content="{{VALUE}}">'
+            },
+            favicon: {
+              label: 'favicon',
+              type: 'text',
+              description: 'The author of website',
+              value: '',
+              code: '<link href="{{VALUE}}" rel="shortcut icon" type="image/x-icon">'
+            }
+          }
+        },
+        facebook: {
+          title: 'facebook',
+          fields: {
+            type: {
+              type: 'hidden',
+              value: () => this.groups.type.fields.type.value,
+              code: '<meta property="og:type" content="{{VALUE}}">'
+            },
+            url: {
+              label: 'URL',
+              type: 'text',
+              value: '',
+              code: '<meta property="og:url" content="{{VALUE}}">'
+            },
+            image: {
+              label: 'Image URL',
+              type: 'text',
+              value: '',
+              code: '<meta property="og:image" content="{{VALUE}}">'
+            },
+            description: {
+              label: 'Image URL',
+              type: 'text',
+              line: 3,
+              value: '',
+              code: '<meta property="og:description" content="{{VALUE}}">'
+            },
+            app_id: {
+              label: 'App ID',
+              type: 'text',
+              value: '',
+              code: '<meta property="og:app_id" content="{{VALUE}}">'
+            },
+            locale: {
+              label: 'Locale',
+              type: 'text',
+              value: '',
+              code: '<meta property="og:locale" content="{{VALUE}}">'
+            },
+            video: {
+              label: 'video',
+              type: 'text',
+              value: '',
+              code: '<meta property="og:video" content="{{VALUE}}">',
+              condition: () => this.groups.type.fields.type.value === 'video'
+            }
+          }
+        },
+        twitter: {
+          title: 'Twitter',
+          fields: {
+            type: {
+              label: 'Card type',
+              type: 'radio',
+              value: 'summary',
+              code: '<meta name="twitter:site" content="{{VALUE}}">',
+              options: [
+                {
+                  label: 'Summary Card',
+                  value: 'summary'
+                },
+                {
+                  label: 'Summary Card with Large Image',
+                  value: 'summary_large_image'
+                },
+                {
+                  label: 'App Card',
+                  value: 'app'
+                },
+                {
+                  label: 'Player Card',
+                  value: 'player'
+                }
+              ]
+            },
+            site: {
+              label: 'Site',
+              type: 'text',
+              value: '',
+              code: '<meta name="twitter:site" content="{{VALUE}}">'
+            },
+            title: {
+              label: 'Title',
+              type: 'text',
+              value: '',
+              code: '<meta name="twitter:title" content="{{VALUE}}">'
+            },
+            description: {
+              label: 'Description',
+              type: 'text',
+              line: 3,
+              value: '',
+              code: '<meta name="twitter:description" content="{{VALUE}}">'
+            },
+            creator: {
+              label: 'creator',
+              type: 'text',
+              value: '',
+              code: '<meta name="twitter:creator" content="{{VALUE}}">'
+            },
+            image: {
+              label: 'Image',
+              type: 'text',
+              value: '',
+              code: '<meta name="twitter:image" content="{{VALUE}}">',
+              condition: () => this.groups.twitter.fields.type.value !== 'summary'
+            },
+            playerUrl: {
+              label: 'Player URL',
+              type: 'text',
+              value: '',
+              code: '<meta name="twitter:image" content="{{VALUE}}">',
+              condition: () => this.groups.twitter.fields.type.value === 'player'
+            },
+            appCountry: {
+              label: 'App country',
+              type: 'text',
+              value: '',
+              code: '<meta name="twitter:app:country" content="{{VALUE}}">',
+              condition: () => this.groups.twitter.fields.type.value === 'app'
+            },
+            appNameAppStore: {
+              label: 'App name',
+              type: 'text',
+              value: '',
+              code: '<meta name="twitter:app:name:iphone" content="{{VALUE}}">\n<meta name="twitter:app:name:ipad" content="{{VALUE}}">\n<meta name="twitter:app:name:googleplay" content="{{VALUE}}">',
+              condition: () => this.groups.twitter.fields.type.value === 'app'
+            },
+            appIdAppStore: {
+              label: 'App ID (App Store)',
+              type: 'text',
+              value: '',
+              code: '<meta name="twitter:app:id:iphone" content="{{VALUE}}">\n<meta name="twitter:app:id:ipad" content="{{VALUE}}">',
+              condition: () => this.groups.twitter.fields.type.value === 'app'
+            },
+            appUrlAppStore: {
+              label: 'App URL(App Store)',
+              type: 'text',
+              value: '',
+              code: '<meta name="twitter:app:url:iphone" content="{{VALUE}}">\n<meta name="twitter:app:url:ipad" content="{{VALUE}}">',
+              condition: () => this.groups.twitter.fields.type.value === 'app'
+            },
+            appIdPlayStore: {
+              label: 'App ID (Play Store)',
+              type: 'text',
+              value: '',
+              code: '<meta name="twitter:app:id:googleplay" content="{{VALUE}}">',
+              condition: () => this.groups.twitter.fields.type.value === 'app'
+            },
+            appUrlPlayStore: {
+              label: 'App URL(Play Store)',
+              type: 'text',
+              value: '',
+              code: '<meta name="twitter:app:url:googleplay" content="{{VALUE}}">',
+              condition: () => this.groups.twitter.fields.type.value === 'app'
+            }
+          }
         }
-      ]
+      }
+    }
+  },
+  computed: {
+    code () {
+      let replaceRegex = /{{VALUE}}/g
+      let code = '<meta charset="utf-8">\n<meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1">\n'
+      for (const group in this.groups) {
+        if (!this.groups[group].condition || (this.groups[group].condition && this.groups[group].condition())) {
+          for (const field in this.groups[group].fields) {
+            if (this.groups[group].fields[field].value && this.groups[group].fields[field].code && (!this.groups[group].fields[field].condition || (this.groups[group].fields[field].condition && this.groups[group].fields[field].condition()))) {
+              let value = ''
+              if (typeof this.groups[group].fields[field].value === 'function') {
+                value = this.groups[group].fields[field].value()
+              } else {
+                value = this.groups[group].fields[field].value
+              }
+              code = code + this.groups[group].fields[field].code.replace(replaceRegex, value) + '\n'
+            }
+          }
+        }
+      }
+      return code
     }
   }
 }
 </script>
-
-<style lang="scss">
-#app {
-  width: 100%;
-  max-width: 950px;
-  margin: 0 auto;
-
-  .site-header{
-    margin-bottom: 50px;
-  }
-
-  main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .editor, .preview{
-      flex: 1 1 auto;
-      width: 50%;
-      height:100%;
-      padding: 0 30px;
-    }
-    .editor{
-      border-left: 1px solid rgba(49, 137, 99, 0.39);
-
-    }
-  }
-}
-</style>

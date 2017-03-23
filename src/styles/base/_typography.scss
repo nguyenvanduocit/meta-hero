@@ -1,0 +1,10 @@
+html{
+  font-size: 100%;
+  body{
+    font-family: $font--primary;
+    @include font-size(16);
+    color: $color--primary;
+    letter-spacing: 0;
+    line-height: 25px;
+  }
+}

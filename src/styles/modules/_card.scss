@@ -1,0 +1,19 @@
+.card{
+  box-shadow: 0 0 26px 0 rgba(0,0,0,0.12);
+  .card__title{
+    background-image: linear-gradient(-225deg, #679FE4 0%, #F3DCFB 100%);
+    h1{
+      margin: 0;
+      padding-left: 30px;
+      padding-top: 13px;
+      padding-bottom: 13px;
+      @include font-size(18);
+      font-weight: normal;
+      color: #FFFFFF;
+    }
+  }
+  .card__body{
+    padding: 30px;
+    background: #FFFFFF;
+  }
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <header class="site-header">
+    <header class="site-footer">
         <nav class="inner">
           <div class="left">
             <a class="site-brand" href="#" ><img src="/static/logo.svg"></a>
@@ -16,9 +16,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .site-header{
-    border-bottom: 1px solid rgba(74, 82, 95, 0.1);
-    margin-bottom: 80px;
+  .site-footer{
+    border-top: 1px solid rgba(74, 82, 95, 0.1);
+    margin-top: 80px;
     .inner{
       display: flex;
       align-items: center;

@@ -31,14 +31,14 @@ export default {
       .site-brand{
         line-height: 0;
         display: block;
-        padding: 30px 0;
+        padding: 25px 0;
         text-decoration: none;
         color: #318963;
         font-size: 20px;
         font-weight: 400;
         text-transform: uppercase;
         img{
-          height: 20px;
+          height: 60px;
         }
       }
     }

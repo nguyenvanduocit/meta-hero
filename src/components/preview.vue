@@ -7,7 +7,6 @@
   </div>
 </template>
 <script>
-  import '../../node_modules/highlight.js/styles/darkula.css'
   export default {
     props: ['code']
   }
@@ -15,7 +14,6 @@
 <style lang="scss" scoped>
   .preview{
     .card__title{
-      /* background: */
       background-image: linear-gradient(-225deg, #FEC180 0%, #FF8993 100%);
     }
     pre{

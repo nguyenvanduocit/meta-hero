@@ -4,11 +4,12 @@
     <div class="container">
       <main>
         <div class="row">
-          <div class="gr-8">
-            <preview :code="code"></preview>
-          </div>
-          <div class="gr-4">
+          <div class="gr-12 gr-4@lg gr-4@xl">
             <editor :groups="groups"></editor>
+          </div>
+          <div class="gr-12 gr-8@lg gr-8@xl">
+            <div class="preview-pin"></div>
+            <preview :code="code"></preview>
           </div>
         </div>
       </main>
@@ -23,6 +24,7 @@ import preview from './components/preview'
 import siteHeader from './components/site-header'
 import siteFooter from './components/site-footer'
 import './styles/app.scss'
+import Tether from 'tether'
 
 export default {
   name: 'app',
@@ -31,6 +33,21 @@ export default {
     preview,
     siteHeader,
     siteFooter
+  },
+  mounted () {
+    /* eslint-disable no-new */
+    new Tether({
+      element: this.$el,
+      target: '.preview-pin',
+      attachment: 'top left',
+      targetAttachment: 'top left',
+      constraints: [
+        {
+          to: 'window',
+          pin: true
+        }
+      ]
+    })
   },
   data () {
     return {

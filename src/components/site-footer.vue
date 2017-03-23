@@ -3,7 +3,7 @@
     <header class="site-footer">
         <nav class="inner">
           <div class="left">
-            <a class="site-brand" href="#" ><img src="/static/logo.svg"></a>
+            <a class="site-brand" href="https://senviet.org" >&copy; Sen Việt - Bản quyền thuộc về Sen Việt.</a>
           </div>
         </nav>
     </header>
@@ -33,13 +33,10 @@ export default {
         display: block;
         padding: 30px 0;
         text-decoration: none;
-        color: #318963;
-        font-size: 20px;
+        color: #4b4b4b;
+        font-size: 16px;
         font-weight: 400;
         text-transform: uppercase;
-        img{
-          height: 20px;
-        }
       }
     }
   }
